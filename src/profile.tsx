@@ -1,0 +1,111 @@
+interface InfoItemProps {
+	label: string;
+	value: string;
+}
+
+const InfoItem = ({ label, value }: InfoItemProps) => {
+	return (
+		<div style={styles.infoItem as React.CSSProperties}>
+			<span style={styles.infoLabel as React.CSSProperties}>{label}</span>
+			<span style={styles.infoValue as React.CSSProperties}>{value}</span>
+		</div>
+	);
+};
+
+interface ProfileCardProps {
+	name: string;
+	hobby: string;
+	favoriteFood: string;
+	favoriteMovie: string;
+	iconUrl: string;
+	favoritePlace: string;
+}
+
+export const ProfileCard = ({
+	name,
+	hobby,
+	favoriteFood,
+	favoriteMovie,
+	iconUrl,
+	favoritePlace,
+}: ProfileCardProps) => {
+	const infoItems: InfoItemProps[] = [
+		{ label: "趣味", value: hobby },
+		{ label: "好きな食べ物", value: favoriteFood },
+		{ label: "好きな映画", value: favoriteMovie },
+		{ label: "お気に入りの場所", value: favoritePlace },
+	];
+
+	return (
+		<div style={styles.card as React.CSSProperties}>
+			<div style={styles.iconContainer as React.CSSProperties}>
+				<img
+					src={iconUrl}
+					alt="Profile Icon"
+					style={styles.icon as React.CSSProperties}
+				/>
+				<h2 style={styles.name as React.CSSProperties}>{name}</h2>
+			</div>
+			<div style={styles.infoContainer as React.CSSProperties}>
+				{infoItems.map((item, index) => (
+					// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+					<InfoItem key={index} label={item.label} value={item.value} />
+				))}
+			</div>
+		</div>
+	);
+};
+
+const styles = {
+	card: {
+		display: "flex",
+		flexDirection: "column",
+		alignItems: "center",
+		justifyContent: "center",
+		width: "350px",
+		padding: "20px",
+		borderRadius: "10px",
+		boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+		backgroundColor: "#e6f2ff",
+	},
+	iconContainer: {
+		display: "flex",
+		flexDirection: "column",
+		alignItems: "center",
+		marginBottom: "20px",
+	},
+	icon: {
+		width: "120px",
+		height: "120px",
+		borderRadius: "50%",
+		objectFit: "cover",
+		border: "3px solid #8c9db5",
+	},
+	name: {
+		fontSize: "24px",
+		fontWeight: "bold",
+		marginTop: "10px",
+		textAlign: "center",
+	},
+	infoContainer: {
+		display: "flex",
+		flexDirection: "column",
+		width: "100%",
+	},
+	infoItem: {
+		display: "flex",
+		flexDirection: "column",
+		marginBottom: "25px",
+		height: "50px",
+	},
+	infoLabel: {
+		fontSize: "12px",
+		fontWeight: "bold",
+		color: "#8c9db5",
+	},
+	infoValue: {
+		fontSize: "18px",
+		display: "flex",
+		alignItems: "center",
+	},
+};
