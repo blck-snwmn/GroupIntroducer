@@ -1,4 +1,4 @@
-import { AbsoluteFill } from 'remotion';
+import { AbsoluteFill, staticFile } from 'remotion';
 import { Logo } from './Logo';
 import { Subtitle } from './Subtitle';
 import { Title } from './Title';
@@ -10,6 +10,11 @@ import { linearTiming, TransitionSeries } from "@remotion/transitions";
 import { wipe } from "@remotion/transitions/wipe";
 import { ReactElement } from 'react';
 
+type IntroductionCards = z.infer<typeof introductionCardSchema>[];
+const data: IntroductionCards = [
+
+];
+
 function toTransitions(components: ReactElement[]): ReactElement[] {
 	const separator = <TransitionSeries.Transition
 		presentation={wipe()}
@@ -17,7 +22,7 @@ function toTransitions(components: ReactElement[]): ReactElement[] {
 	/>
 	return components.reduce((accumulator: ReactElement[], currentComponent, currentIndex) => {
 		accumulator.push(
-			<TransitionSeries.Sequence durationInFrames={60}>
+			<TransitionSeries.Sequence durationInFrames={90}>
 				{currentComponent}
 			</TransitionSeries.Sequence>
 		);
@@ -31,10 +36,6 @@ function toTransitions(components: ReactElement[]): ReactElement[] {
 }
 
 export const Introduction: React.FC = () => {
-	const data: z.infer<typeof introductionCardSchema>[] = [
-
-	];
-
 	const ics = data.map((item, index) => (
 		<IntroductionCard
 			key={index}
