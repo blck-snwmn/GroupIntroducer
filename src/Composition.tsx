@@ -5,27 +5,16 @@ import { Title } from './Title';
 import { z } from 'zod';
 import { zColor } from '@remotion/zod-types';
 import { ProfileCard } from './profile';
+import { IntroductionCard } from './Introduction';
 
-export const myCompSchema = z.object({
-	titleText: z.string(),
-	titleColor: zColor(),
-	logoColor: zColor(),
-});
 
-export const Profile: React.FC<z.infer<typeof myCompSchema>> = ({
-	titleText: propOne,
-	titleColor: propTwo,
-	logoColor: propThree,
-}) => {
+export const Introduction: React.FC = () => {
 	return (
 		<AbsoluteFill className="bg-gray-100 items-center justify-center">
-			<ProfileCard
+			<IntroductionCard
 				name={"John Doe"}
-				hobby={"Programming"}
-				favoriteFood={"海鮮丼ああああああああああ いいいいいいいい"}
-				favoriteMovie={"SFやファンタジーああああああああああいいいいいいいい"}
-				iconUrl="https://avatars.githubusercontent.com/u/44711725?v=4"
-				favoritePlace={"日本の京都の祇園地区"}
+				icon="https://avatars.githubusercontent.com/u/44711725?v=4"
+				description="he is a software engineer. he like writing code and solving problems.he is a software engineer. he like writing code and solving problems.he is a software engineer. he like writing code and solving problems.he is a software engineer. he like writing code and solving problems.he is a software engineer. he like writing code and solving problems.he is a software engineer. he like writing code and solving problems."
 			/>
 		</AbsoluteFill>
 	);
