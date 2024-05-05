@@ -14,6 +14,9 @@ importers:
       '@remotion/cli':
         specifier: 4.0.150
         version: 4.0.150(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@remotion/transitions':
+        specifier: ^4.0.150
+        version: 4.0.150(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@remotion/zod-types':
         specifier: 4.0.150
         version: 4.0.150(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(zod@3.22.3)
@@ -35,7 +38,7 @@ importers:
         version: 4.0.150(eslint@8.57.0)(typescript@5.4.5)
       '@remotion/tailwind':
         specifier: 4.0.150
-        version: 4.0.150(@remotion/bundler@4.0.150(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(typescript@5.4.5)(webpack@5.83.1(esbuild@0.18.6))
+        version: 4.0.150(@remotion/bundler@4.0.150(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(typescript@5.4.5)(webpack@5.83.1)
       '@types/react':
         specifier: ^18.0.26
         version: 18.3.1
@@ -545,6 +548,9 @@ packages:
       react: '>=16.8.0'
       react-dom: '>=16.8.0'
 
+  '@remotion/paths@4.0.150':
+    resolution: {integrity: sha512-H6gVXOHG0EFmgJaZ6tfQYRlYYV4kwkl35s8a0R9Lk6M4UR0M+BkhmDNvae8ptOIk3mljzkenKONL+MvQlnhj7Q==}
+
   '@remotion/player@4.0.150':
     resolution: {integrity: sha512-L8k2wLr9KHTejpIk0vyoTfV/xsbvlgwPYYhKQHLHwLD5gvxsnxkeO8Fe6GuqXmQpv8G6wjJy0w4BBSxlZShXjg==}
     peerDependencies:
@@ -553,6 +559,12 @@ packages:
 
   '@remotion/renderer@4.0.150':
     resolution: {integrity: sha512-IPqVVbcPNVJyhgke95m3AYGQFpwHO1qRjhJ7TlAZPgT4z8HgJL4WKcT3Swuyk9aTRd6kpcO1TWnzBqJNaLuqzQ==}
+    peerDependencies:
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
+
+  '@remotion/shapes@4.0.150':
+    resolution: {integrity: sha512-bYZd8HgEbCHXdoJr7Rdp610ciCBDmBLX2Wwt9t7tAKs5CzSzUmIWjm7BbAG0jCGbbPdWjEtH4XD8aaohgaQCvA==}
     peerDependencies:
       react: '>=16.8.0'
       react-dom: '>=16.8.0'
@@ -570,6 +582,12 @@ packages:
     resolution: {integrity: sha512-C/GnrrUILZLc56pDvAlYYGo2p8Fb/OeWLUwqj8FcTRD4hx8Q0+5yRFGgOMIWW9fuaRS/z9ZD8vXJbccmQaPU8A==}
     peerDependencies:
       '@remotion/bundler': 4.0.150
+
+  '@remotion/transitions@4.0.150':
+    resolution: {integrity: sha512-B8kRhAJbBMIG8r3drxsYVlmMCOt6xDVRUEaVPzjRXoG9ZKTwBdlV+n52S9+5/OnzcKTtCHIViY5V74KDzYNGNQ==}
+    peerDependencies:
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
 
   '@remotion/zod-types@4.0.150':
     resolution: {integrity: sha512-CyQscMyBEN9WhbpdKstKRlTrt25fBiLqK4tYwVGDv2FkFarGOK6LlMmo3f58jrpa7I1XaUTRQJSiz9zQVMJz9w==}
@@ -2895,6 +2913,8 @@ snapshots:
       react-dom: 18.3.1(react@18.3.1)
       remotion: 4.0.150(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
 
+  '@remotion/paths@4.0.150': {}
+
   '@remotion/player@4.0.150(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       react: 18.3.1
@@ -2922,6 +2942,12 @@ snapshots:
       - bufferutil
       - supports-color
       - utf-8-validate
+
+  '@remotion/shapes@4.0.150(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      '@remotion/paths': 4.0.150
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
 
   '@remotion/studio-server@4.0.150(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
@@ -2970,20 +2996,28 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  '@remotion/tailwind@4.0.150(@remotion/bundler@4.0.150(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(typescript@5.4.5)(webpack@5.83.1(esbuild@0.18.6))':
+  '@remotion/tailwind@4.0.150(@remotion/bundler@4.0.150(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(typescript@5.4.5)(webpack@5.83.1)':
     dependencies:
       '@remotion/bundler': 4.0.150(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       autoprefixer: 10.4.19(postcss@8.4.38)
-      css-loader: 5.2.7(webpack@5.83.1(esbuild@0.18.6))
+      css-loader: 5.2.7(webpack@5.83.1)
       postcss: 8.4.38
-      postcss-loader: 7.3.4(postcss@8.4.38)(typescript@5.4.5)(webpack@5.83.1(esbuild@0.18.6))
+      postcss-loader: 7.3.4(postcss@8.4.38)(typescript@5.4.5)(webpack@5.83.1)
       postcss-preset-env: 8.5.1(postcss@8.4.38)
-      style-loader: 2.0.0(webpack@5.83.1(esbuild@0.18.6))
+      style-loader: 2.0.0(webpack@5.83.1)
       tailwindcss: 3.4.3
     transitivePeerDependencies:
       - ts-node
       - typescript
       - webpack
+
+  '@remotion/transitions@4.0.150(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      '@remotion/paths': 4.0.150
+      '@remotion/shapes': 4.0.150(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+      remotion: 4.0.150(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
 
   '@remotion/zod-types@4.0.150(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(zod@3.22.3)':
     dependencies:
@@ -3474,6 +3508,20 @@ snapshots:
       schema-utils: 3.3.0
       semver: 7.6.0
       webpack: 5.83.1(esbuild@0.18.6)
+
+  css-loader@5.2.7(webpack@5.83.1):
+    dependencies:
+      icss-utils: 5.1.0(postcss@8.4.38)
+      loader-utils: 2.0.4
+      postcss: 8.4.38
+      postcss-modules-extract-imports: 3.1.0(postcss@8.4.38)
+      postcss-modules-local-by-default: 4.0.5(postcss@8.4.38)
+      postcss-modules-scope: 3.2.0(postcss@8.4.38)
+      postcss-modules-values: 4.0.0(postcss@8.4.38)
+      postcss-value-parser: 4.2.0
+      schema-utils: 3.3.0
+      semver: 7.6.0
+      webpack: 5.83.1
 
   css-prefers-color-scheme@8.0.2(postcss@8.4.38):
     dependencies:
@@ -4464,13 +4512,13 @@ snapshots:
     optionalDependencies:
       postcss: 8.4.38
 
-  postcss-loader@7.3.4(postcss@8.4.38)(typescript@5.4.5)(webpack@5.83.1(esbuild@0.18.6)):
+  postcss-loader@7.3.4(postcss@8.4.38)(typescript@5.4.5)(webpack@5.83.1):
     dependencies:
       cosmiconfig: 8.3.6(typescript@5.4.5)
       jiti: 1.21.0
       postcss: 8.4.38
       semver: 7.6.0
-      webpack: 5.83.1(esbuild@0.18.6)
+      webpack: 5.83.1
     transitivePeerDependencies:
       - typescript
 
@@ -4865,6 +4913,12 @@ snapshots:
       schema-utils: 3.3.0
       webpack: 5.83.1(esbuild@0.18.6)
 
+  style-loader@2.0.0(webpack@5.83.1):
+    dependencies:
+      loader-utils: 2.0.4
+      schema-utils: 3.3.0
+      webpack: 5.83.1
+
   sucrase@3.35.0:
     dependencies:
       '@jridgewell/gen-mapping': 0.3.5
@@ -4928,6 +4982,15 @@ snapshots:
       webpack: 5.83.1(esbuild@0.18.6)
     optionalDependencies:
       esbuild: 0.18.6
+
+  terser-webpack-plugin@5.3.10(webpack@5.83.1):
+    dependencies:
+      '@jridgewell/trace-mapping': 0.3.25
+      jest-worker: 27.5.1
+      schema-utils: 3.3.0
+      serialize-javascript: 6.0.2
+      terser: 5.31.0
+      webpack: 5.83.1
 
   terser@5.31.0:
     dependencies:
@@ -5042,6 +5105,37 @@ snapshots:
   webidl-conversions@4.0.2: {}
 
   webpack-sources@3.2.3: {}
+
+  webpack@5.83.1:
+    dependencies:
+      '@types/eslint-scope': 3.7.7
+      '@types/estree': 1.0.5
+      '@webassemblyjs/ast': 1.12.1
+      '@webassemblyjs/wasm-edit': 1.12.1
+      '@webassemblyjs/wasm-parser': 1.12.1
+      acorn: 8.11.3
+      acorn-import-assertions: 1.9.0(acorn@8.11.3)
+      browserslist: 4.23.0
+      chrome-trace-event: 1.0.3
+      enhanced-resolve: 5.16.0
+      es-module-lexer: 1.5.2
+      eslint-scope: 5.1.1
+      events: 3.3.0
+      glob-to-regexp: 0.4.1
+      graceful-fs: 4.2.11
+      json-parse-even-better-errors: 2.3.1
+      loader-runner: 4.3.0
+      mime-types: 2.1.35
+      neo-async: 2.6.2
+      schema-utils: 3.3.0
+      tapable: 2.2.1
+      terser-webpack-plugin: 5.3.10(webpack@5.83.1)
+      watchpack: 2.4.1
+      webpack-sources: 3.2.3
+    transitivePeerDependencies:
+      - '@swc/core'
+      - esbuild
+      - uglify-js
 
   webpack@5.83.1(esbuild@0.18.6):
     dependencies:

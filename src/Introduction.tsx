@@ -2,22 +2,22 @@ import { z } from 'zod';
 import { zColor } from '@remotion/zod-types';
 import { Img } from 'remotion';
 
-const myCompSchema = z.object({
+export const introductionCardSchema = z.object({
   icon: z.string().url(),
   name: z.string(),
   description: z.string(),
-  // titleColor: zColor(),
-  // logoColor: zColor(),
+  bgColor: zColor(),
 });
 
-export const IntroductionCard: React.FC<z.infer<typeof myCompSchema>> = ({
+export const IntroductionCard: React.FC<z.infer<typeof introductionCardSchema>> = ({
   icon,
   name,
   description,
+  bgColor
 }) => {
   const desc = description.replace(/\n/g, '<br />')
   return (
-    <div className='flex bg-slate-300 p-5 rounded-xl'>
+    <div className='flex p-5 rounded-xl' style={{ backgroundColor: bgColor }}>
       <div className='flex flex-col items-center w-64 mx-10'>
         <Img
           src={icon}
