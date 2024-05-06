@@ -3,23 +3,14 @@ import { TransitionSeries, linearTiming } from "@remotion/transitions";
 import { wipe } from "@remotion/transitions/wipe";
 import type { ReactElement } from "react";
 import { AbsoluteFill, Audio, staticFile } from "remotion";
-import { IntroductionCard } from "./Introduction";
+import { IntroductionCard, Members } from "./Introduction";
 import { data } from "./data";
 const { fontFamily } = loadFont();
 
 export const Introduction: React.FC = () => {
-	const ics = data.flatMap((item, index) =>
-		item.member.map((item) => (
-			<IntroductionCard
-				key={item.name}
-				bgColor={item.bgColor}
-				icon={item.icon}
-				name={item.name}
-				description={item.description}
-			/>
-		)),
+	const transtions = data.flatMap((item, index) =>
+		makeMemberTransition(item.member),
 	);
-	const transtions = toTransitions(ics);
 
 	return (
 		<AbsoluteFill
@@ -46,17 +37,26 @@ export const Introduction: React.FC = () => {
 	);
 };
 
-function toTransitions(components: ReactElement[]): ReactElement[] {
+function makeMemberTransition(mems: Members): ReactElement[] {
 	const separator = (
 		<TransitionSeries.Transition
 			presentation={wipe()}
 			timing={linearTiming({ durationInFrames: 30 })}
 		/>
 	);
-	return components.reduce(
+
+	return mems.map((item) => (
+		<IntroductionCard
+			key={item.name}
+			bgColor={item.bgColor}
+			icon={item.icon}
+			name={item.name}
+			description={item.description}
+		/>
+	)).reduce(
 		(accumulator: ReactElement[], currentComponent, currentIndex) => {
 			let dif = 180;
-			if (currentIndex === 0 || currentIndex === components.length - 1) {
+			if (currentIndex === 0 || currentIndex === mems.length - 1) {
 				dif -= 30;
 			}
 			accumulator.push(
@@ -65,7 +65,7 @@ function toTransitions(components: ReactElement[]): ReactElement[] {
 				</TransitionSeries.Sequence>,
 			);
 
-			if (currentIndex < components.length - 1) {
+			if (currentIndex < mems.length - 1) {
 				accumulator.push(separator);
 			}
 
