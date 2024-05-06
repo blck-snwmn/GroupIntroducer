@@ -49,7 +49,7 @@ export const Introduction: React.FC = () => {
 			className="items-center justify-center"
 			style={{ fontFamily }}
 		>
-			<Audio src={staticFile("sound.mp3")} volume={0.5} loop />
+			<Audio src={staticFile("sound.mp3")} volume={0.05} loop />
 			<TransitionSeries>
 				{transtions}
 				{/*
