@@ -8,15 +8,17 @@ import { data } from "./data";
 const { fontFamily } = loadFont();
 
 export const Introduction: React.FC = () => {
-	const ics = data.map((item, index) => (
-		<IntroductionCard
-			key={item.name}
-			bgColor={item.bgColor}
-			icon={item.icon}
-			name={item.name}
-			description={item.description}
-		/>
-	));
+	const ics = data.flatMap((item, index) =>
+		item.member.map((item) => (
+			<IntroductionCard
+				key={item.name}
+				bgColor={item.bgColor}
+				icon={item.icon}
+				name={item.name}
+				description={item.description}
+			/>
+		)),
+	);
 	const transtions = toTransitions(ics);
 
 	return (

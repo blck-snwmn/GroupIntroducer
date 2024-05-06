@@ -4,7 +4,7 @@ import "./style.css";
 import { data } from "./data";
 
 export const RemotionRoot: React.FC = () => {
-	const ITEM_NUMBER = data.length; // change your item number here
+	const ITEM_NUMBER = data.reduce((acc, elm) => acc + elm.member.length, 0); // change your item number here
 	const FRAM_PER_ITEM = 180;
 	const FRAM_PER_TRANSITION = 30;
 	const DURATION =

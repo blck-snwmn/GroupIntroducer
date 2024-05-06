@@ -4,18 +4,27 @@ import { Img } from "remotion";
 import { z } from "zod";
 const parser = loadDefaultJapaneseParser();
 
-const introductionCardSchema = z.object({
+const memberSchema = z.object({
 	icon: z.string().url(),
 	name: z.string(),
 	description: z.string(),
 	bgColor: zColor(),
 });
 
-type IntroductionCard = z.infer<typeof introductionCardSchema>;
+const groupSchema = z.array(
+	z.object({
+		groupName: z.string(),
+		member: z.array(memberSchema),
+	}),
+);
 
-export type IntroductionCards = IntroductionCard[];
+export type Group = z.infer<typeof groupSchema>;
 
-export const IntroductionCard: React.FC<IntroductionCard> = ({
+type Member = z.infer<typeof memberSchema>;
+
+export type Members = Member[];
+
+export const IntroductionCard: React.FC<Member> = ({
 	icon,
 	name,
 	description,
