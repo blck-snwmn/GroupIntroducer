@@ -4,9 +4,9 @@ import { wipe } from "@remotion/transitions/wipe";
 import type { ReactElement } from "react";
 import { AbsoluteFill, Audio, staticFile } from "remotion";
 import { z } from "zod";
-import { type Groups, IntroductionCard, type Members } from "./Introduction";
+import { IntroductionCard, type Members } from "./Introduction";
 import { data } from "./data";
-import { GroupCard } from "./GroupCard";
+import { GroupCard, type Groups } from "./GroupCard";
 const { fontFamily } = loadFont();
 
 const memberFrameSchema = z.object({
@@ -55,7 +55,7 @@ function makeTransition(cfg: Config, gs: Groups): ReactElement[] {
 	return gs.reduce((acc, elm) => {
 		acc.push(
 			<TransitionSeries.Sequence durationInFrames={cfg.framePerGroup}>
-				<GroupCard name={elm.name} icon={elm.icon} member={elm.member} />
+				<GroupCard name={elm.name} logo={elm.logo} member={elm.member} bgColor={elm.bgColor} />
 			</TransitionSeries.Sequence>,
 		);
 		acc.push(...makeMemberTransition(cfg, elm.member));
