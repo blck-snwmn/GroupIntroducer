@@ -4,10 +4,13 @@ import "./style.css";
 import { data } from "./data";
 
 export const RemotionRoot: React.FC = () => {
+	const GROUP_NUMBER = data.length;
+	const FRAME_PER_GROUP = 180;
 	const ITEM_NUMBER = data.reduce((acc, elm) => acc + elm.member.length, 0); // change your item number here
 	const FRAM_PER_ITEM = 180;
 	const FRAM_PER_TRANSITION = 30;
 	const DURATION =
+		GROUP_NUMBER * FRAME_PER_GROUP +
 		(ITEM_NUMBER - 2) * FRAM_PER_ITEM +
 		2 * (FRAM_PER_ITEM - FRAM_PER_TRANSITION) -
 		(ITEM_NUMBER - 1) * FRAM_PER_TRANSITION;
@@ -21,9 +24,9 @@ export const RemotionRoot: React.FC = () => {
 				width={1280}
 				height={720}
 				defaultProps={{
-					titleText: "Welcome to Remotion with Tailwind CSS",
-					titleColor: "#000000",
-					logoColor: "#00bfff",
+					framePerGroup: FRAME_PER_GROUP,
+					framePerItem: FRAM_PER_ITEM,
+					framePerTransition: FRAM_PER_TRANSITION,
 				}}
 			/>
 		</>

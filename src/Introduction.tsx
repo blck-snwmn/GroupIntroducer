@@ -11,14 +11,14 @@ const memberSchema = z.object({
 	bgColor: zColor(),
 });
 
-const groupSchema = z.array(
+const groupsSchema = z.array(
 	z.object({
 		groupName: z.string(),
 		member: z.array(memberSchema),
 	}),
 );
 
-export type Group = z.infer<typeof groupSchema>;
+export type Groups = z.infer<typeof groupsSchema>;
 
 type Member = z.infer<typeof memberSchema>;
 

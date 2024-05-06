@@ -3,14 +3,27 @@ import { TransitionSeries, linearTiming } from "@remotion/transitions";
 import { wipe } from "@remotion/transitions/wipe";
 import type { ReactElement } from "react";
 import { AbsoluteFill, Audio, staticFile } from "remotion";
-import { IntroductionCard, Members } from "./Introduction";
+import { z } from "zod";
+import { type Groups, IntroductionCard, type Members } from "./Introduction";
 import { data } from "./data";
 const { fontFamily } = loadFont();
 
-export const Introduction: React.FC = () => {
-	const transtions = data.flatMap((item, index) =>
-		makeMemberTransition(item.member),
-	);
+const memberFrameSchema = z.object({
+	framePerItem: z.number(),
+	framePerTransition: z.number(),
+});
+
+const groupFrameSchema = z.object({
+	framePerGroup: z.number(),
+});
+
+const configSchema = groupFrameSchema.merge(memberFrameSchema);
+
+type MemberConfig = z.infer<typeof memberFrameSchema>;
+type Config = z.infer<typeof configSchema>;
+
+export const Introduction: React.FC<Config> = (cfg) => {
+	const transtions = makeTransition(cfg, data);
 
 	return (
 		<AbsoluteFill
@@ -37,7 +50,22 @@ export const Introduction: React.FC = () => {
 	);
 };
 
-function makeMemberTransition(mems: Members): ReactElement[] {
+function makeTransition(cfg: Config, gs: Groups): ReactElement[] {
+	return gs.reduce((acc, elm) => {
+		acc.push(
+			<TransitionSeries.Sequence durationInFrames={cfg.framePerGroup}>
+				<div>{elm.groupName}</div>
+			</TransitionSeries.Sequence>,
+		);
+		acc.push(...makeMemberTransition(cfg, elm.member));
+		return acc;
+	}, [] as ReactElement[]);
+}
+
+function makeMemberTransition(
+	cfg: MemberConfig,
+	mems: Members,
+): ReactElement[] {
 	const separator = (
 		<TransitionSeries.Transition
 			presentation={wipe()}
@@ -45,19 +73,20 @@ function makeMemberTransition(mems: Members): ReactElement[] {
 		/>
 	);
 
-	return mems.map((item) => (
-		<IntroductionCard
-			key={item.name}
-			bgColor={item.bgColor}
-			icon={item.icon}
-			name={item.name}
-			description={item.description}
-		/>
-	)).reduce(
-		(accumulator: ReactElement[], currentComponent, currentIndex) => {
-			let dif = 180;
+	return mems
+		.map((item) => (
+			<IntroductionCard
+				key={item.name}
+				bgColor={item.bgColor}
+				icon={item.icon}
+				name={item.name}
+				description={item.description}
+			/>
+		))
+		.reduce((accumulator: ReactElement[], currentComponent, currentIndex) => {
+			let dif = cfg.framePerItem;
 			if (currentIndex === 0 || currentIndex === mems.length - 1) {
-				dif -= 30;
+				dif -= cfg.framePerTransition;
 			}
 			accumulator.push(
 				<TransitionSeries.Sequence durationInFrames={dif}>
@@ -70,7 +99,5 @@ function makeMemberTransition(mems: Members): ReactElement[] {
 			}
 
 			return accumulator;
-		},
-		[],
-	);
+		}, []);
 }
