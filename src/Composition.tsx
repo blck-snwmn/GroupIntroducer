@@ -6,6 +6,7 @@ import { AbsoluteFill, Audio, staticFile } from "remotion";
 import { z } from "zod";
 import { type Groups, IntroductionCard, type Members } from "./Introduction";
 import { data } from "./data";
+import { GroupCard } from "./GroupCard";
 const { fontFamily } = loadFont();
 
 const memberFrameSchema = z.object({
@@ -54,7 +55,7 @@ function makeTransition(cfg: Config, gs: Groups): ReactElement[] {
 	return gs.reduce((acc, elm) => {
 		acc.push(
 			<TransitionSeries.Sequence durationInFrames={cfg.framePerGroup}>
-				<div>{elm.groupName}</div>
+				<GroupCard name={elm.name} icon={elm.icon} member={elm.member} />
 			</TransitionSeries.Sequence>,
 		);
 		acc.push(...makeMemberTransition(cfg, elm.member));
