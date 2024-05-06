@@ -3,14 +3,14 @@ import { Introduction } from "./Composition";
 import "./style.css";
 import { data } from "./data";
 
-
 export const RemotionRoot: React.FC = () => {
 	const ITEM_NUMBER = data.length; // change your item number here
 	const FRAM_PER_ITEM = 180;
 	const FRAM_PER_TRANSITION = 30;
-	const DURATION = (ITEM_NUMBER - 2) * FRAM_PER_ITEM
-		+ 2 * (FRAM_PER_ITEM - FRAM_PER_TRANSITION)
-		- (ITEM_NUMBER - 1) * FRAM_PER_TRANSITION;
+	const DURATION =
+		(ITEM_NUMBER - 2) * FRAM_PER_ITEM +
+		2 * (FRAM_PER_ITEM - FRAM_PER_TRANSITION) -
+		(ITEM_NUMBER - 1) * FRAM_PER_TRANSITION;
 	return (
 		<>
 			<Composition

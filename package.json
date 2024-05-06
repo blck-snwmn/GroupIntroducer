@@ -2,16 +2,12 @@
 	"name": "hello-remotion",
 	"version": "1.0.0",
 	"description": "My Remotion video",
-	"sideEffects": [
-		"*.css"
-	],
+	"sideEffects": ["*.css"],
 	"repository": {},
 	"license": "UNLICENSED",
 	"pnpm": {
 		"peerDependencyRules": {
-			"ignoreMissing": [
-				"webpack"
-			]
+			"ignoreMissing": ["webpack"]
 		}
 	},
 	"dependencies": {
