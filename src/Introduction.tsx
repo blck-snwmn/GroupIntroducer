@@ -8,7 +8,9 @@ export const introductionCardSchema = z.object({
 	description: z.string(),
 	bgColor: zColor(),
 });
+
 type IntroductionCard = z.infer<typeof introductionCardSchema>;
+
 export type IntroductionCards = IntroductionCard[];
 
 export const IntroductionCard: React.FC<IntroductionCard> = ({
