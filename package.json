@@ -2,12 +2,16 @@
 	"name": "hello-remotion",
 	"version": "1.0.0",
 	"description": "My Remotion video",
-	"sideEffects": ["*.css"],
+	"sideEffects": [
+		"*.css"
+	],
 	"repository": {},
 	"license": "UNLICENSED",
 	"pnpm": {
 		"peerDependencyRules": {
-			"ignoreMissing": ["webpack"]
+			"ignoreMissing": [
+				"webpack"
+			]
 		}
 	},
 	"dependencies": {
@@ -16,6 +20,7 @@
 		"@remotion/google-fonts": "^4.0.150",
 		"@remotion/transitions": "^4.0.150",
 		"@remotion/zod-types": "4.0.150",
+		"budoux": "^0.6.2",
 		"react": "^18.0.0",
 		"react-dom": "^18.0.0",
 		"remotion": "4.0.150",

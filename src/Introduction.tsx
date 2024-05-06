@@ -1,6 +1,8 @@
 import { zColor } from "@remotion/zod-types";
 import { Img } from "remotion";
 import { z } from "zod";
+import { loadDefaultJapaneseParser } from 'budoux';
+const parser = loadDefaultJapaneseParser();
 
 const introductionCardSchema = z.object({
 	icon: z.string().url(),
@@ -19,6 +21,7 @@ export const IntroductionCard: React.FC<IntroductionCard> = ({
 	description,
 	bgColor,
 }) => {
+	const d = parser.translateHTMLString(description);
 	return (
 		<div className="flex rounded-xl h-2/3 w-5/6 p-5" style={{ backgroundColor: bgColor }}>
 			<div className="flex flex-col items-center justify-center w-2/6">
@@ -26,8 +29,8 @@ export const IntroductionCard: React.FC<IntroductionCard> = ({
 				<h2 className="text-3xl mt-5">{name}</h2>
 			</div>
 			<div className="flex justify-center w-4/6 py-3 pl-5">
-				<div className="text-xl/loose bg-slate-50 p-2 rounded-xl ">
-					{description}
+				<div className="text-xl/loose bg-slate-50 p-2 rounded-xl" dangerouslySetInnerHTML={{ __html: d }}>
+					{/* {d} */}
 				</div>
 			</div>
 		</div>
