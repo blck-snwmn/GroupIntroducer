@@ -1,6 +1,9 @@
 import { loadFont } from "@remotion/google-fonts/NotoSansJP";
 import { TransitionSeries, linearTiming } from "@remotion/transitions";
 import { wipe } from "@remotion/transitions/wipe";
+import { flip } from "@remotion/transitions/flip";
+import { clockWipe } from "@remotion/transitions/clock-wipe";
+import { slide } from "@remotion/transitions/slide";
 import type { ReactElement } from "react";
 import { AbsoluteFill, Audio, staticFile } from "remotion";
 import { z } from "zod";
@@ -16,6 +19,7 @@ const memberFrameSchema = z.object({
 
 const groupFrameSchema = z.object({
 	framePerGroup: z.number(),
+	framePerGroupTransition: z.number(),
 });
 
 const configSchema = groupFrameSchema.merge(memberFrameSchema);
@@ -54,9 +58,17 @@ export const Introduction: React.FC<Config> = (cfg) => {
 function makeTransition(cfg: Config, gs: Groups): ReactElement[] {
 	return gs.reduce((acc, elm) => {
 		acc.push(
+			// <TransitionSeries.Transition
+			// 	presentation={wipe()}
+			// 	timing={linearTiming({ durationInFrames: cfg.framePerGroupTransition })}
+			// />,
 			<TransitionSeries.Sequence durationInFrames={cfg.framePerGroup}>
 				<GroupCard name={elm.name} logo={elm.logo} member={elm.member} bgColor={elm.bgColor} />
 			</TransitionSeries.Sequence>,
+			// <TransitionSeries.Transition
+			// 	presentation={wipe()}
+			// 	timing={linearTiming({ durationInFrames: cfg.framePerGroupTransition })}
+			// />
 		);
 		acc.push(...makeMemberTransition(cfg, elm.member));
 		return acc;
