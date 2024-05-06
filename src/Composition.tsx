@@ -1,19 +1,11 @@
-import { AbsoluteFill, staticFile } from 'remotion';
-import { Logo } from './Logo';
-import { Subtitle } from './Subtitle';
-import { Title } from './Title';
-import { z } from 'zod';
-import { zColor } from '@remotion/zod-types';
-import { ProfileCard } from './profile';
-import { IntroductionCard, introductionCardSchema } from './Introduction';
+import { AbsoluteFill } from 'remotion';
+import { IntroductionCard } from './Introduction';
 import { linearTiming, TransitionSeries } from "@remotion/transitions";
 import { wipe } from "@remotion/transitions/wipe";
 import { ReactElement } from 'react';
-
-type IntroductionCards = z.infer<typeof introductionCardSchema>[];
-const data: IntroductionCards = [
-
-];
+import { loadFont } from "@remotion/google-fonts/NotoSansJP";
+import { data } from './data';
+const { fontFamily } = loadFont();
 
 function toTransitions(components: ReactElement[]): ReactElement[] {
 	const separator = <TransitionSeries.Transition
@@ -48,7 +40,7 @@ export const Introduction: React.FC = () => {
 	const transtions = toTransitions(ics);
 
 	return (
-		<AbsoluteFill className="bg-gray-100 items-center justify-center">
+		<AbsoluteFill className="items-center justify-center" style={{ fontFamily }}>
 			<TransitionSeries>
 				{transtions}
 				{/*
