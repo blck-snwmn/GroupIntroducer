@@ -4,24 +4,12 @@ import { Img } from "remotion";
 import { z } from "zod";
 const parser = loadDefaultJapaneseParser();
 
-const memberSchema = z.object({
+export const memberSchema = z.object({
 	icon: z.string().url(),
 	name: z.string(),
 	description: z.string(),
 	bgColor: zColor(),
 });
-
-const groupSchema = z.object({
-	name: z.string(),
-	icon: z.string().url(),
-	member: z.array(memberSchema),
-})
-
-const groupsSchema = z.array(groupSchema);
-
-export type Group = z.infer<typeof groupSchema>;
-
-export type Groups = z.infer<typeof groupsSchema>;
 
 type Member = z.infer<typeof memberSchema>;
 
