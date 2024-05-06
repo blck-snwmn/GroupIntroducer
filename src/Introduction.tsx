@@ -15,10 +15,9 @@ export const IntroductionCard: React.FC<z.infer<typeof introductionCardSchema>> 
   description,
   bgColor
 }) => {
-  const desc = description.replace(/\n/g, '<br />')
   return (
-    <div className='flex p-5 rounded-xl' style={{ backgroundColor: bgColor }}>
-      <div className='flex flex-col items-center w-64 mx-10'>
+    <div className='flex p-3 rounded-xl' style={{ backgroundColor: bgColor }}>
+      <div className='flex flex-col items-center w-64 mr-5'>
         <Img
           src={icon}
           alt="Profile Icon"
@@ -26,8 +25,8 @@ export const IntroductionCard: React.FC<z.infer<typeof introductionCardSchema>> 
         />
         <h2 className='text-2xl'>{name}</h2>
       </div >
-      <div className='text-base/loose w-96'>
-        {desc}
+      <div className='text-base/loose w-96 bg-slate-50 p-2 rounded-xl'>
+        {description}
       </div>
     </div >
   )
