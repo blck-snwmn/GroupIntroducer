@@ -70,7 +70,7 @@ function makeMemberTransition(
 	const separator = (
 		<TransitionSeries.Transition
 			presentation={wipe()}
-			timing={linearTiming({ durationInFrames: 30 })}
+			timing={linearTiming({ durationInFrames: cfg.framePerTransition })}
 		/>
 	);
 
