@@ -11,12 +11,15 @@ const memberSchema = z.object({
 	bgColor: zColor(),
 });
 
-const groupsSchema = z.array(
-	z.object({
-		groupName: z.string(),
-		member: z.array(memberSchema),
-	}),
-);
+const groupSchema = z.object({
+	name: z.string(),
+	icon: z.string().url(),
+	member: z.array(memberSchema),
+})
+
+const groupsSchema = z.array(groupSchema);
+
+export type Group = z.infer<typeof groupSchema>;
 
 export type Groups = z.infer<typeof groupsSchema>;
 
