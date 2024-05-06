@@ -16,8 +16,12 @@ function toTransitions(components: ReactElement[]): ReactElement[] {
 	);
 	return components.reduce(
 		(accumulator: ReactElement[], currentComponent, currentIndex) => {
+			let dif = 120
+			if (currentIndex == 0 || currentIndex == components.length - 1) {
+				dif = 90
+			}
 			accumulator.push(
-				<TransitionSeries.Sequence durationInFrames={90}>
+				<TransitionSeries.Sequence durationInFrames={dif}>
 					{currentComponent}
 				</TransitionSeries.Sequence>,
 			);
