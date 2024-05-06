@@ -13,7 +13,7 @@ export const RemotionRoot: React.FC = () => {
 		GROUP_NUMBER * FRAME_PER_GROUP +
 		(ITEM_NUMBER - 2) * FRAM_PER_ITEM +
 		2 * (FRAM_PER_ITEM - FRAM_PER_TRANSITION) -
-		(ITEM_NUMBER - 1) * FRAM_PER_TRANSITION;
+		(ITEM_NUMBER - 1 + GROUP_NUMBER) * FRAM_PER_TRANSITION;
 	return (
 		<>
 			<Composition
