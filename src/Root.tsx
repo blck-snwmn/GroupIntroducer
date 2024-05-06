@@ -1,9 +1,11 @@
 import { Composition } from "remotion";
 import { Introduction } from "./Composition";
 import "./style.css";
+import { data } from "./data";
+
 
 export const RemotionRoot: React.FC = () => {
-	const ITEM_NUMBER = 5; // change your item number here
+	const ITEM_NUMBER = data.length; // change your item number here
 	const FRAM_PER_ITEM = 180;
 	const FRAM_PER_TRANSITION = 30;
 	const DURATION = (ITEM_NUMBER - 2) * FRAM_PER_ITEM
