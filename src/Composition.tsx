@@ -7,35 +7,6 @@ import { IntroductionCard } from "./Introduction";
 import { data } from "./data";
 const { fontFamily } = loadFont();
 
-function toTransitions(components: ReactElement[]): ReactElement[] {
-	const separator = (
-		<TransitionSeries.Transition
-			presentation={wipe()}
-			timing={linearTiming({ durationInFrames: 30 })}
-		/>
-	);
-	return components.reduce(
-		(accumulator: ReactElement[], currentComponent, currentIndex) => {
-			let dif = 180
-			if (currentIndex == 0 || currentIndex == components.length - 1) {
-				dif -= 30
-			}
-			accumulator.push(
-				<TransitionSeries.Sequence durationInFrames={dif}>
-					{currentComponent}
-				</TransitionSeries.Sequence>,
-			);
-
-			if (currentIndex < components.length - 1) {
-				accumulator.push(separator);
-			}
-
-			return accumulator;
-		},
-		[],
-	);
-}
-
 export const Introduction: React.FC = () => {
 	const ics = data.map((item, index) => (
 		<IntroductionCard
@@ -72,3 +43,32 @@ export const Introduction: React.FC = () => {
 		</AbsoluteFill>
 	);
 };
+
+function toTransitions(components: ReactElement[]): ReactElement[] {
+	const separator = (
+		<TransitionSeries.Transition
+			presentation={wipe()}
+			timing={linearTiming({ durationInFrames: 30 })}
+		/>
+	);
+	return components.reduce(
+		(accumulator: ReactElement[], currentComponent, currentIndex) => {
+			let dif = 180
+			if (currentIndex == 0 || currentIndex == components.length - 1) {
+				dif -= 30
+			}
+			accumulator.push(
+				<TransitionSeries.Sequence durationInFrames={dif}>
+					{currentComponent}
+				</TransitionSeries.Sequence>,
+			);
+
+			if (currentIndex < components.length - 1) {
+				accumulator.push(separator);
+			}
+
+			return accumulator;
+		},
+		[],
+	);
+}
