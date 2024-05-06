@@ -1,22 +1,22 @@
-import {interpolate} from 'remotion';
-import {useCurrentFrame} from 'remotion';
-import React from 'react';
+import type React from "react";
+import { interpolate } from "remotion";
+import { useCurrentFrame } from "remotion";
 
 export const Title: React.FC<{
 	titleText: string;
 	titleColor: string;
-}> = ({titleText, titleColor}) => {
+}> = ({ titleText, titleColor }) => {
 	const frame = useCurrentFrame();
 	const opacity = interpolate(frame, [20, 40], [0, 1], {
-		extrapolateLeft: 'clamp',
-		extrapolateRight: 'clamp',
+		extrapolateLeft: "clamp",
+		extrapolateRight: "clamp",
 	});
 	return (
 		<div
-			style={{opacity, color: titleColor}}
+			style={{ opacity, color: titleColor }}
 			className="text-5xl font-bold leading-relaxed"
 		>
-			{' '}
+			{" "}
 			{titleText}
 		</div>
 	);
