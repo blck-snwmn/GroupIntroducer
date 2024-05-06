@@ -2,7 +2,7 @@ import { loadFont } from "@remotion/google-fonts/NotoSansJP";
 import { TransitionSeries, linearTiming } from "@remotion/transitions";
 import { wipe } from "@remotion/transitions/wipe";
 import type { ReactElement } from "react";
-import { AbsoluteFill } from "remotion";
+import { AbsoluteFill, Audio, staticFile } from "remotion";
 import { IntroductionCard } from "./Introduction";
 import { data } from "./data";
 const { fontFamily } = loadFont();
@@ -49,6 +49,7 @@ export const Introduction: React.FC = () => {
 			className="items-center justify-center"
 			style={{ fontFamily }}
 		>
+			<Audio src={staticFile("sound.mp3")} volume={0.5} loop />
 			<TransitionSeries>
 				{transtions}
 				{/*
