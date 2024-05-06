@@ -11,9 +11,12 @@ export const introductionCardSchema = z.object({
 type IntroductionCard = z.infer<typeof introductionCardSchema>;
 export type IntroductionCards = IntroductionCard[];
 
-export const IntroductionCard: React.FC<
-	z.infer<typeof introductionCardSchema>
-> = ({ icon, name, description, bgColor }) => {
+export const IntroductionCard: React.FC<IntroductionCard> = ({
+	icon,
+	name,
+	description,
+	bgColor,
+}) => {
 	return (
 		<div className="flex p-3 rounded-xl" style={{ backgroundColor: bgColor }}>
 			<div className="flex flex-col items-center w-64 mr-5">
