@@ -2,7 +2,7 @@ import { zColor } from "@remotion/zod-types";
 import { Img } from "remotion";
 import { z } from "zod";
 
-export const introductionCardSchema = z.object({
+const introductionCardSchema = z.object({
 	icon: z.string().url(),
 	name: z.string(),
 	description: z.string(),
