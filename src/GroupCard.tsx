@@ -28,7 +28,7 @@ export const GroupCard: React.FC<Group> = (group) => {
   }
   const bg = group.bgColor ? group.bgColor : "#ffffff";
   return (
-    <div className="flex flex-col items-center justify-center w-full h-ful"
+    <div className="flex flex-col items-center justify-center w-full h-full"
       style={{ backgroundColor: bg }}
     >
       <div className="h-2/3 w-2/3 flex items-center justify-center">
