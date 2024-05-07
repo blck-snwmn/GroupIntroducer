@@ -5,7 +5,7 @@ import { flip } from "@remotion/transitions/flip";
 import { clockWipe } from "@remotion/transitions/clock-wipe";
 import { slide } from "@remotion/transitions/slide";
 import type { ReactElement } from "react";
-import { AbsoluteFill, Audio, staticFile } from "remotion";
+import { AbsoluteFill, Audio, interpolate, staticFile, useCurrentFrame } from "remotion";
 import { z } from "zod";
 import { IntroductionCard, type Members } from "./Introduction";
 import { data } from "./data";
@@ -22,20 +22,24 @@ const groupFrameSchema = z.object({
 	framePerGroupTransition: z.number(),
 });
 
-const configSchema = groupFrameSchema.merge(memberFrameSchema);
+const configSchema = groupFrameSchema.merge(memberFrameSchema).merge(z.object({
+	totalFrame: z.number(),
+}));
 
 type MemberConfig = z.infer<typeof memberFrameSchema>;
 type Config = z.infer<typeof configSchema>;
 
 export const Introduction: React.FC<Config> = (cfg) => {
 	const transtions = makeTransition(cfg, data);
+	const frame = useCurrentFrame();
+	const value = interpolate(frame, [0, cfg.totalFrame - 60, cfg.totalFrame], [0.5, 0.5, 0], { extrapolateLeft: "clamp" })
 
 	return (
 		<AbsoluteFill
 			className="items-center justify-center"
 			style={{ fontFamily }}
 		>
-			<Audio src={staticFile("sound.mp3")} volume={0.05} loop />
+			<Audio src={staticFile("sound.mp3")} volume={value} loop />
 			<TransitionSeries>
 				{transtions}
 				{/*

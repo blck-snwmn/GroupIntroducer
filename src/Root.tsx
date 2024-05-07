@@ -30,6 +30,7 @@ export const RemotionRoot: React.FC = () => {
 					framePerGroupTransition: FRAME_PER_GROUP_TRANSITION,
 					framePerItem: FRAM_PER_ITEM,
 					framePerTransition: FRAM_PER_TRANSITION,
+					totalFrame: DURATION,
 				}}
 			/>
 		</>
