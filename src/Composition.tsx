@@ -62,17 +62,23 @@ export const Introduction: React.FC<Config> = (cfg) => {
 function makeTransition(cfg: Config, gs: Groups): ReactElement[] {
 	return gs.reduce((acc, elm) => {
 		acc.push(
-			// <TransitionSeries.Transition
-			// 	presentation={wipe()}
-			// 	timing={linearTiming({ durationInFrames: cfg.framePerGroupTransition })}
-			// />,
+			<TransitionSeries.Transition
+				presentation={clockWipe({
+					height: 720,
+					width: 1280,
+				})}
+				timing={linearTiming({ durationInFrames: cfg.framePerGroupTransition })}
+			/>,
 			<TransitionSeries.Sequence durationInFrames={cfg.framePerGroup}>
 				<GroupCard name={elm.name} logo={elm.logo} member={elm.member} bgColor={elm.bgColor} />
 			</TransitionSeries.Sequence>,
-			// <TransitionSeries.Transition
-			// 	presentation={wipe()}
-			// 	timing={linearTiming({ durationInFrames: cfg.framePerGroupTransition })}
-			// />
+			<TransitionSeries.Transition
+				presentation={clockWipe({
+					height: 720,
+					width: 1280,
+				})}
+				timing={linearTiming({ durationInFrames: cfg.framePerGroupTransition })}
+			/>
 		);
 		acc.push(...makeMemberTransition(cfg, elm.member));
 		return acc;
