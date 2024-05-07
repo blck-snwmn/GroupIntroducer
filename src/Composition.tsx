@@ -1,15 +1,19 @@
 import { loadFont } from "@remotion/google-fonts/NotoSansJP";
 import { TransitionSeries, linearTiming } from "@remotion/transitions";
-import { wipe } from "@remotion/transitions/wipe";
-import { flip } from "@remotion/transitions/flip";
 import { clockWipe } from "@remotion/transitions/clock-wipe";
-import { slide } from "@remotion/transitions/slide";
+import { wipe } from "@remotion/transitions/wipe";
 import type { ReactElement } from "react";
-import { AbsoluteFill, Audio, interpolate, staticFile, useCurrentFrame } from "remotion";
+import {
+	AbsoluteFill,
+	Audio,
+	interpolate,
+	staticFile,
+	useCurrentFrame,
+} from "remotion";
 import { z } from "zod";
+import { GroupCard, type Groups } from "./GroupCard";
 import { IntroductionCard, type Members } from "./Introduction";
 import { data } from "./data";
-import { GroupCard, type Groups } from "./GroupCard";
 const { fontFamily } = loadFont();
 
 const memberFrameSchema = z.object({
@@ -22,9 +26,11 @@ const groupFrameSchema = z.object({
 	framePerGroupTransition: z.number(),
 });
 
-const configSchema = groupFrameSchema.merge(memberFrameSchema).merge(z.object({
-	totalFrame: z.number(),
-}));
+const configSchema = groupFrameSchema.merge(memberFrameSchema).merge(
+	z.object({
+		totalFrame: z.number(),
+	}),
+);
 
 type MemberConfig = z.infer<typeof memberFrameSchema>;
 type Config = z.infer<typeof configSchema>;
@@ -32,7 +38,12 @@ type Config = z.infer<typeof configSchema>;
 export const Introduction: React.FC<Config> = (cfg) => {
 	const transtions = makeTransition(cfg, data);
 	const frame = useCurrentFrame();
-	const value = interpolate(frame, [0, cfg.totalFrame - 60, cfg.totalFrame], [0.5, 0.5, 0], { extrapolateLeft: "clamp" })
+	const value = interpolate(
+		frame,
+		[0, cfg.totalFrame - 60, cfg.totalFrame],
+		[0.5, 0.5, 0],
+		{ extrapolateLeft: "clamp" },
+	);
 
 	return (
 		<AbsoluteFill
@@ -70,7 +81,12 @@ function makeTransition(cfg: Config, gs: Groups): ReactElement[] {
 				timing={linearTiming({ durationInFrames: cfg.framePerGroupTransition })}
 			/>,
 			<TransitionSeries.Sequence durationInFrames={cfg.framePerGroup}>
-				<GroupCard name={elm.name} logo={elm.logo} member={elm.member} bgColor={elm.bgColor} />
+				<GroupCard
+					name={elm.name}
+					logo={elm.logo}
+					member={elm.member}
+					bgColor={elm.bgColor}
+				/>
 			</TransitionSeries.Sequence>,
 			<TransitionSeries.Transition
 				presentation={clockWipe({
@@ -78,7 +94,7 @@ function makeTransition(cfg: Config, gs: Groups): ReactElement[] {
 					width: 1280,
 				})}
 				timing={linearTiming({ durationInFrames: cfg.framePerGroupTransition })}
-			/>
+			/>,
 		);
 		acc.push(...makeMemberTransition(cfg, elm.member));
 		return acc;
