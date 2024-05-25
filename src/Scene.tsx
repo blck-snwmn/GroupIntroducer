@@ -3,7 +3,7 @@ import { z } from "zod";
 
 export const scene = z.object({
 	logo: z.string().url(),
-})
+});
 
 type Scene = z.infer<typeof scene>;
 

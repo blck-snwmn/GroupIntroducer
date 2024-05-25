@@ -8,7 +8,10 @@ export const RemotionRoot: React.FC = () => {
 	const GROUP_NUMBER = input.groups.length;
 	const FRAME_PER_GROUP = 180;
 	const FRAME_PER_GROUP_TRANSITION = 15;
-	const ITEM_NUMBER = input.groups.reduce((acc, elm) => acc + elm.member.length, 0); // change your item number here
+	const ITEM_NUMBER = input.groups.reduce(
+		(acc, elm) => acc + elm.member.length,
+		0,
+	); // change your item number here
 	const FRAM_PER_ITEM = 180;
 	const FRAM_PER_TRANSITION = 30;
 	const DURATION =

@@ -11,10 +11,10 @@ import {
 	useCurrentFrame,
 } from "remotion";
 import { z } from "zod";
-import { GroupCard, groupsSchema, type Groups } from "./GroupCard";
+import { GroupCard, type Groups, groupsSchema } from "./GroupCard";
 import { IntroductionCard, type Members } from "./Introduction";
-import { input } from "./data";
 import { Scene, scene } from "./Scene";
+import { input } from "./data";
 const { fontFamily } = loadFont();
 
 const memberFrameSchema = z.object({
@@ -31,10 +31,10 @@ const SceneFrameSchema = z.object({
 	framePerScene: z.number(),
 });
 
-const configSchema = groupFrameSchema.
-	merge(memberFrameSchema).
-	merge(SceneFrameSchema).
-	merge(
+const configSchema = groupFrameSchema
+	.merge(memberFrameSchema)
+	.merge(SceneFrameSchema)
+	.merge(
 		z.object({
 			totalFrame: z.number(),
 		}),
@@ -47,17 +47,21 @@ const sceneInput = z.object({
 	start: scene,
 	groups: groupsSchema,
 	end: scene,
-})
+});
 
 export type SceneInput = z.infer<typeof sceneInput>;
 
 export const Introduction: React.FC<Config> = (cfg) => {
-	const start = <TransitionSeries.Sequence durationInFrames={cfg.framePerScene}>
-		<Scene logo={input.start.logo} />
-	</TransitionSeries.Sequence>
-	const end = <TransitionSeries.Sequence durationInFrames={cfg.framePerScene}>
-		<Scene logo={input.end.logo} />
-	</TransitionSeries.Sequence>
+	const start = (
+		<TransitionSeries.Sequence durationInFrames={cfg.framePerScene}>
+			<Scene logo={input.start.logo} />
+		</TransitionSeries.Sequence>
+	);
+	const end = (
+		<TransitionSeries.Sequence durationInFrames={cfg.framePerScene}>
+			<Scene logo={input.end.logo} />
+		</TransitionSeries.Sequence>
+	);
 
 	const t = makeTransition(cfg, input.groups);
 
